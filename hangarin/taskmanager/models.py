@@ -9,10 +9,16 @@ class BaseModel(models.Model):
         abstract = True
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    category_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.category_name
 
 class Priority(models.Model):
-    name = models.CharField(max_length=100)
+    priority_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.priority_name
 
 class Task(models.Model):
     title = models.CharField(max_length=100)
@@ -28,9 +34,15 @@ class Task(models.Model):
     categoryFK = models.ForeignKey(Category, on_delete=models.CASCADE)
     priorityFK = models.ForeignKey(Priority, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
+    
 class Note(models.Model):
     taskFK = models.ForeignKey(Task, on_delete=models.CASCADE)
     content = models.TextField()
+
+    def __str__(self):
+        return self.content
 
 class SubTask(models.Model):
     parentTaskFK = models.ForeignKey(Task, on_delete=models.CASCADE)
@@ -42,5 +54,7 @@ class SubTask(models.Model):
             ],
             default = "Pending"
             )
-
+    
+    def __str__(self):
+        return self.title
 
