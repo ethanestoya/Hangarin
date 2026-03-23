@@ -17,14 +17,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from taskmanager import views
-from taskmanager.views import HomePageView, TasksView, SubtasksView, CategoriesView, PrioritiesView, NotesView
+from taskmanager.views import HomePageView, TasksView, TasksCreateView, SubTasksView, SubtasksCreateView, CategoriesView, CategoryCreateView, PrioritiesView, NotesView, NoteCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePageView.as_view(), name='home'),
-    path('task-list', TasksView.as_view(), name='task-list'),
-    path('subtask_list', SubtasksView.as_view(), name='subtask-list'),
+    
+    path('task_list', TasksView.as_view(), name='task-list'),
+    path('task_list/add', TasksCreateView.as_view(), name='task-add'),
+    
+    path('subtask_list', SubTasksView.as_view(), name='subtask-list'),
+    path('subtask_list/add', SubtasksCreateView.as_view(), name='subtask-add'),
+    
     path('category_list', CategoriesView.as_view(), name='category-list'),
+    path('category_list/add', CategoryCreateView.as_view(), name='category-add'),
+    
     path('priority_list', PrioritiesView.as_view(), name='priority-list'),
+    
     path('notes_list', NotesView.as_view(), name='notes-list'),
+    path('notes_list/add', NoteCreateView.as_view(), name='note-add'),
+
 ]

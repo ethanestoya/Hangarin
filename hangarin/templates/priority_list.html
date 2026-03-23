@@ -39,16 +39,12 @@
               <thead>
                 <tr>
                   <th scope="col">Name</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Parent Task</th>
                 </tr>
               </thead>
               <tbody>
                 {% for object in object_list %}
                 <tr>
-                  <td>{{ object.title }}</td>
-                  <td>{{ object.status }}</td>
-                  <td>{{ object.parentTaskFK }}</td>
+                  <td>{{ object.priority_name }}</td>
                 </tr>
                 {% endfor %}
               </tbody>

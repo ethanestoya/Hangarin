@@ -28,8 +28,8 @@
               </div>
               <div class="col-md-6">
                 <div class="pull-right">
-                  <a href="{% url 'subtask-add' %}" class="btn btn-success btn-rounded">
-                    Add Subtask
+                  <a href="{% url 'category-add' %}" class="btn btn-success btn-rounded">
+                    Add Category
                   </a>
                 </div>
               </div>
@@ -39,16 +39,12 @@
               <thead>
                 <tr>
                   <th scope="col">Name</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Parent Task</th>
                 </tr>
               </thead>
               <tbody>
                 {% for object in object_list %}
                 <tr>
-                  <td>{{ object.title }}</td>
-                  <td>{{ object.status }}</td>
-                  <td>{{ object.parentTaskFK }}</td>
+                  <td>{{ object.category_name }}</td>
                 </tr>
                 {% endfor %}
               </tbody>

@@ -9,7 +9,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">List of Subtasks</div>
+            <div class="card-title">List of Tasks</div>
             <div class="card-category">Page Subtitle</div>
           </div>
           <br />
@@ -28,8 +28,8 @@
               </div>
               <div class="col-md-6">
                 <div class="pull-right">
-                  <a href="{% url 'subtask-add' %}" class="btn btn-success btn-rounded">
-                    Add Subtask
+                  <a href="{% url 'task-add' %}" class="btn btn-success btn-rounded">
+                    Add Task
                   </a>
                 </div>
               </div>
@@ -40,7 +40,9 @@
                 <tr>
                   <th scope="col">Name</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Parent Task</th>
+                  <th scope="col">Deadline</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Priority</th>
                 </tr>
               </thead>
               <tbody>
@@ -48,7 +50,9 @@
                 <tr>
                   <td>{{ object.title }}</td>
                   <td>{{ object.status }}</td>
-                  <td>{{ object.parentTaskFK }}</td>
+                  <td>{{ object.deadline }}</td>
+                  <td>{{ object.categoryFK }}</td>
+                  <td>{{ object.priorityFK }}</td>
                 </tr>
                 {% endfor %}
               </tbody>
