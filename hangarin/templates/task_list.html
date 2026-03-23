@@ -43,6 +43,7 @@
                   <th scope="col">Deadline</th>
                   <th scope="col">Category</th>
                   <th scope="col">Priority</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,6 +54,18 @@
                   <td>{{ object.deadline }}</td>
                   <td>{{ object.categoryFK }}</td>
                   <td>{{ object.priorityFK }}</td>
+                  <td>
+                    <a href="task_list/{{ object.id }}">Edit</a>
+                    <a href="task_list/{{ object.id }}/delete" class="text-danger">Delete</a>
+                  </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="4" style="text-align: center">
+                      <p class="text-sm font-weight-bold mb-0">No Records Found</p>
+                    </td>
+                  </tr>
+                </tr>
                 </tr>
                 {% endfor %}
               </tbody>

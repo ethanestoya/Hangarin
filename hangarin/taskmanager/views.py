@@ -68,5 +68,47 @@ class NoteCreateView(CreateView):
     success_url = reverse_lazy('note-list')
 
 # Update View
+class TasksUpdateView(UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name = 'task_form.html'
+    success_url = reverse_lazy('task-list')
+
+class SubtasksUpdateView(UpdateView):
+    model = SubTask
+    form_class = SubTaskForm
+    template_name = 'subtask_form.html'
+    success_url = reverse_lazy('subtask-list')
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'category_form.html'
+    success_url = reverse_lazy('category-list')
+
+class NoteUpdateView(UpdateView):
+    model = Note
+    form_class = NoteForm
+    template_name = 'note_form.html'
+    success_url = reverse_lazy('note-list')
 
 # Delete View
+class TasksDeleteView(DeleteView):
+    model = Task
+    template_name = 'task_del.html'
+    success_url = reverse_lazy('task-list')
+
+class SubtasksDeleteView(DeleteView):
+    model = SubTask
+    template_name = 'subtask_del.html'
+    success_url = reverse_lazy('subtask-list')
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'category_del.html'
+    success_url = reverse_lazy('category-list')
+
+class NoteDeleteView(DeleteView):
+    model = Note
+    template_name = 'note_del.html'
+    success_url = reverse_lazy('note-list')

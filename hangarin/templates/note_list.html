@@ -49,6 +49,18 @@
                   <td>{{ object.taskFK }}</td>
                   <td>{{ object.content }}</td>
                   <td>{{ object.created_at }}</td>
+                  <td>
+                    <a href="note_list/{{ object.id }}">Edit</a>
+                    <a href="note_list/{{ object.id }}/delete" class="text-danger">Delete</a>
+                  </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="4" style="text-align: center">
+                      <p class="text-sm font-weight-bold mb-0">No Records Found</p>
+                    </td>
+                  </tr>
+                </tr>
                 </tr>
                 {% endfor %}
               </tbody>

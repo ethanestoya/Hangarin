@@ -45,6 +45,18 @@
                 {% for object in object_list %}
                 <tr>
                   <td>{{ object.category_name }}</td>
+                  <td>
+                    <a href="category_list/{{ object.id }}">Edit</a>
+                    <a href="category_list/{{ object.id }}/delete" class="text-danger">Delete</a>
+                  </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="4" style="text-align: center">
+                      <p class="text-sm font-weight-bold mb-0">No Records Found</p>
+                    </td>
+                  </tr>
+                </tr>
                 </tr>
                 {% endfor %}
               </tbody>
