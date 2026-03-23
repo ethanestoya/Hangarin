@@ -1,29 +1,38 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class BaseModel(models.Model):
-    created_at = models.DateField(auto_now_add=True, db_index=True)
-    updated_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now,)
+    updated_at = models.DateTimeField(auto_now=True,)
 
     class Meta:
         abstract = True
 
-class Category(models.Model):
+class Category(BaseModel):
     category_name = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.category_name
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
 
-class Priority(models.Model):
+    def __str__(self):
+        return self.category_name.title()
+
+class Priority(BaseModel):
     priority_name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.priority_name
+    class Meta:
+        verbose_name = "Priority"
+        verbose_name_plural = "Priorities"
 
-class Task(models.Model):
+    def __str__(self):
+        return self.priority_name.title()
+
+class Task(BaseModel):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
-    deadline = models.DateTimeField()
+    deadline = models.DateField()
     status = models.CharField(max_length=50,
             choices=[("Pending", "Pending"),
             ("In Progress", "In Progress"),
@@ -35,16 +44,16 @@ class Task(models.Model):
     priorityFK = models.ForeignKey(Priority, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return self.title.title()
     
-class Note(models.Model):
+class Note(BaseModel):
     taskFK = models.ForeignKey(Task, on_delete=models.CASCADE)
     content = models.TextField()
 
     def __str__(self):
-        return self.content
+        return self.content.title()
 
-class SubTask(models.Model):
+class SubTask(BaseModel):
     parentTaskFK = models.ForeignKey(Task, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     status = models.CharField(max_length=50,
@@ -56,5 +65,5 @@ class SubTask(models.Model):
             )
     
     def __str__(self):
-        return self.title
+        return self.title.title()
 
