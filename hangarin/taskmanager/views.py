@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.db.models import Q
 
 from taskmanager.models import Category, Priority, Task, Note, SubTask
 from taskmanager.forms import TaskForm, SubTaskForm, CategoryForm, NoteForm
@@ -13,11 +14,36 @@ class HomePageView(ListView):
     context_object_name = 'home'
     template_name = 'home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_tasks"] = Task.objects.count()
+
+        today = timezone.now().date()
+        count = Task.objects.filter(
+            status="Completed",
+            updated_at__year=today.year,
+            updated_at__week=today.isocalendar()[1],
+        ).count()
+
+        context["tasks_completed_this_week"] = count
+        return context
+
 class TasksView(ListView):
     model = Task
     context_object_name = 'task'
     template_name = 'task_list.html'
     paginate_by = 5
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        
+        if query:
+            queryset = queryset.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query)
+            )
+        return queryset
 
 class SubTasksView(ListView):
     model = SubTask
@@ -25,11 +51,30 @@ class SubTasksView(ListView):
     template_name = 'subtask_list.html'
     paginate_by = 5
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+
+        if query:
+            queryset = queryset.filter(
+                Q(title__icontains=query) |
+                Q(parentTaskFK__title__icontains=query)
+            )
+        return queryset
+
 class CategoriesView(ListView):
     model = Category
     context_object_name = 'category'
     template_name = 'category_list.html'
     paginate_by = 5
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+
+        if query:
+            queryset = queryset.filter(category_name__icontains=query)
+        return queryset
 
 class PrioritiesView(ListView):
     model = Priority
@@ -37,11 +82,30 @@ class PrioritiesView(ListView):
     template_name = 'priority_list.html'
     paginate_by = 5
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+
+        if query:
+            queryset = queryset.filter(priority_name__icontains=query)
+        return queryset
+
 class NotesView(ListView):
     model = Note
     context_object_name = 'note'
     template_name = 'note_list.html'
     paginate_by = 5
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+
+        if query:
+            queryset = queryset.filter(
+                Q(taskFK__title__icontains=query) |
+                Q(content__icontains=query)
+            )
+        return queryset
 
 # Create View
 class TasksCreateView(CreateView):

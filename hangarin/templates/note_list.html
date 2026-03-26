@@ -41,17 +41,18 @@
                   <th scope="col">Task</th>
                   <th scope="col">Content</th>
                   <th scope="col">Date Created</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                {% for object in object_list %}
+                {% for object in note %}
                 <tr>
                   <td>{{ object.taskFK }}</td>
                   <td>{{ object.content }}</td>
                   <td>{{ object.created_at }}</td>
                   <td>
-                    <a href="note_list/{{ object.id }}">Edit</a>
-                    <a href="note_list/{{ object.id }}/delete" class="text-danger">Delete</a>
+                    <a href="{% url 'note-update' object.id %}">Edit</a>
+                    <a href="{% url 'note-delete' object.id %}" class="text-danger">Delete</a>
                   </td>
                   </tr>
                   {% empty %}

@@ -23,26 +23,31 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePageView.as_view(), name='home'),
     
-    path('task_list', TasksView.as_view(), name='task-list'),
-    path('task_list/add', TasksCreateView.as_view(), name='task-add'),
-    path('task_list/<pk>', TasksUpdateView.as_view(), name='task-update'),
-    path('task_list/<pk>/delete', TasksDeleteView.as_view(), name='task-delete'),
+    # Task Model
+    path('task_list/', TasksView.as_view(), name='task-list'),
+    path('task_list/add/', TasksCreateView.as_view(), name='task-add'),
+    path('task_list/<int:pk>/', TasksUpdateView.as_view(), name='task-update'),
+    path('task_list/<int:pk>/delete/', TasksDeleteView.as_view(), name='task-delete'),
 
-    path('subtask_list', SubTasksView.as_view(), name='subtask-list'),
-    path('subtask_list/add', SubtasksCreateView.as_view(), name='subtask-add'),
-    path('subtask_list/<pk>', SubtasksUpdateView.as_view(), name='subtask-update'),
-    path('subtask_list/<pk>/delete', SubtasksDeleteView.as_view(), name='subtask-delete'),
+    # SubTask Model
+    path('subtask_list/', SubTasksView.as_view(), name='subtask-list'),
+    path('subtask_list/add/', SubtasksCreateView.as_view(), name='subtask-add'),
+    path('subtask_list/<int:pk>/', SubtasksUpdateView.as_view(), name='subtask-update'),
+    path('subtask_list/<int:pk>/delete/', SubtasksDeleteView.as_view(), name='subtask-delete'),
 
-    path('category_list', CategoriesView.as_view(), name='category-list'),
-    path('category_list/add', CategoryCreateView.as_view(), name='category-add'),
-    path('category_list/<pk>', CategoryUpdateView.as_view(), name='category-update'),
-    path('category_list/<pk>/delete', CategoryDeleteView.as_view(), name='category-delete'),
+    # Category Model
+    path('category_list/', CategoriesView.as_view(), name='category-list'),
+    path('category_list/add/', CategoryCreateView.as_view(), name='category-add'),
+    path('category_list/<int:pk>/', CategoryUpdateView.as_view(), name='category-update'),
+    path('category_list/<int:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),
 
-    path('priority_list', PrioritiesView.as_view(), name='priority-list'),
+    # Priority Model
+    path('priority_list/', PrioritiesView.as_view(), name='priority-list'),
     
-    path('notes_list', NotesView.as_view(), name='notes-list'),
-    path('notes_list/add', NoteCreateView.as_view(), name='note-add'),
-    path('notes_list/<pk>', NoteUpdateView.as_view(), name='note-update'),
-    path('notes_list/<pk>', NoteDeleteView.as_view(), name='note-delete'),
+    # Note Model
+    path('notes_list/', NotesView.as_view(), name='notes-list'),
+    path('notes_list/add/', NoteCreateView.as_view(), name='note-add'),
+    path('notes_list/<int:pk>/', NoteUpdateView.as_view(), name='note-update'),
+    path('notes_list/<int:pk>/delete/', NoteDeleteView.as_view(), name='note-delete'),
 
 ]

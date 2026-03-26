@@ -5,19 +5,19 @@ from .models import Task, SubTask, Category, Note
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = "__all__"
+        fields = ['title', 'description', 'deadline', 'status', 'categoryFK', 'priorityFK']
 
 class SubTaskForm(ModelForm):
     class Meta:
         model = SubTask
-        fields = "__all__"
+        fields = ['parentTaskFK', 'title', 'status']
 
 class CategoryForm(ModelForm):
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ['category_name']
 
 class NoteForm(ModelForm):
     class Meta:
         model = Note
-        fields = "__all__"
+        fields = ['taskFK','content']

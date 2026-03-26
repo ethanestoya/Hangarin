@@ -3,7 +3,7 @@ from django.utils import timezone
 
 # Create your models here.
 class BaseModel(models.Model):
-    created_at = models.DateTimeField(default=timezone.now,)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True,)
     updated_at = models.DateTimeField(auto_now=True,)
 
     class Meta:
@@ -32,7 +32,7 @@ class Priority(BaseModel):
 class Task(BaseModel):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
-    deadline = models.DateField()
+    deadline = models.DateField(null=True, blank=True,)
     status = models.CharField(max_length=50,
             choices=[("Pending", "Pending"),
             ("In Progress", "In Progress"),
