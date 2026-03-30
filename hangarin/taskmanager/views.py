@@ -33,6 +33,7 @@ class TasksView(ListView):
     context_object_name = 'task'
     template_name = 'task_list.html'
     paginate_by = 5
+    # ordering = ['priorityFK__priority_name', 'status',]
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -44,6 +45,14 @@ class TasksView(ListView):
                 Q(description__icontains=query)
             )
         return queryset
+    
+    def get_ordering(self):
+        allowed = ['priorityFK__priority_name', 'status',]
+        sort_by = self.request.GET.get('sort_by')
+
+        if sort_by in allowed:
+            return sort_by
+        return 'title'
 
 class SubTasksView(ListView):
     model = SubTask
