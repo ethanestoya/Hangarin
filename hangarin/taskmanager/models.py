@@ -31,7 +31,7 @@ class Priority(BaseModel):
 
 class Task(BaseModel):
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=250, null=True, blank=True,)
     deadline = models.DateField(null=True, blank=True,)
     status = models.CharField(max_length=50,
             choices=[("Pending", "Pending"),
