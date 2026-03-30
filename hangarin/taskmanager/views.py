@@ -17,6 +17,7 @@ class HomePageView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_tasks"] = Task.objects.count()
+        
 
         today = timezone.now().date()
         count = Task.objects.filter(
